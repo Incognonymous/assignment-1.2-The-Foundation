@@ -63,5 +63,50 @@
             document.getElementById('userInput').value = '';
         }
     </script>
+    
+    <h1>Zip Code Checker</h1>
+
+    <!-- User's first and last name input fields -->
+    <input type="text" id="firstName" placeholder="First Name">
+    <input type="text" id="lastName" placeholder="Last Name">
+    <br>
+
+    <!-- User's zip code input field -->
+    <input type="text" id="zipCode" placeholder="Zip Code">
+    <button onclick="processInput()">Submit</button>
+
+    <div id="warning"></div>
+    <div id="secretMessage"></div>
+
+    <script>
+        // Function to process the user input
+        function processInput() {
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var zipCode = document.getElementById('zipCode').value;
+
+            // Combining first and last name
+            var fullName = firstName + ' ' + lastName;
+
+            // Check if the full name is longer than 20 characters
+            if (fullName.length > 20) {
+                document.getElementById('warning').innerHTML = 'Name should be less than 20 characters.';
+                return; // Stop the execution if invalid
+            }
+
+            // Check if the zip code is a 5-digit number
+            if (!/^\d{5}$/.test(zipCode)) {
+                document.getElementById('warning').innerHTML = 'Invalid Zip Code. Please enter a 5-digit Zip Code.';
+                return; // Stop the execution if invalid
+            }
+
+            // If all inputs are valid, display a secret message
+            document.getElementById('secretMessage').style.color = 'green';
+            document.getElementById('secretMessage').innerHTML = 'We have been trying to reach you about your car warranty';
+            document.getElementById('warning').innerHTML = ''; // Clear any previous warnings
+        }
+    </script>
+</body>
+</html>
 </body>
 </html>
