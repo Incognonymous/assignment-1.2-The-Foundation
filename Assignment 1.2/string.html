@@ -36,32 +36,35 @@
 <body>
     <!-- Scott Busby -->
     <img src="palindrome-image.jpg" alt="Palindrome Image" class="centered-image">
-    <!-- Centered Image -->
     <h1>Palindrome Checker</h1>
-    <input type="text" id="userInput" placeholder="Enter a word">
-    <button onclick="checkPalindrome()">Check</button>
+    <button id="checkButton">Check a Word</button>
 
     <div id="result"></div>
 
     <script>
-        // Function to check if the word is a palindrome
-        function checkPalindrome() {
-            // Getting user input
-            var userInput = document.getElementById('userInput').value;
+        document.getElementById('checkButton').addEventListener('click', function checkPalindrome() {
+            var continueChecking = true;
 
-            // Removing spaces and converting to lower case for accurate comparison
-            var formattedInput = userInput.replace(/\s/g, '').toLowerCase();
+            while (continueChecking) {
+                var userInput = prompt("Please enter a word to check if it's a palindrome:");
+                
+                if (userInput === null) {
+                    // User pressed cancel in prompt
+                    continueChecking = false;
+                    break;
+                }
 
-            // Checking if the string is a palindrome
-            if (formattedInput === formattedInput.split('').reverse().join('')) {
-                document.getElementById('result').innerHTML = `"${userInput}" is a palindrome.`;
-            } else {
-                document.getElementById('result').innerHTML = `"${userInput}" is not a palindrome.`;
+                var formattedInput = userInput.replace(/\s/g, '').toLowerCase();
+                if (formattedInput === formattedInput.split('').reverse().join('')) {
+                    document.getElementById('result').innerHTML = `"${userInput}" is a palindrome.`;
+                } else {
+                    document.getElementById('result').innerHTML = `"${userInput}" is not a palindrome.`;
+                }
+
+                // Ask the user if they want to check another word
+                continueChecking = confirm("Do you want to check another word?");
             }
-
-            // Clearing the input field for next input
-            document.getElementById('userInput').value = '';
-        }
+        });
     </script>
     
     <h1>Zip Code Checker</h1>
