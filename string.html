@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Palindrome Checker</title>
+    <style>
+        /* Style for Fonts */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            text-align: center;
+            padding: 50px;
+        }
+
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: green;
+        }
+        /* Style for the centered image */
+                .centered-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scott Busby -->
+    <img src="palindrome-image.jpg" alt="Palindrome Image" class="centered-image">
+    <h1>Palindrome Checker</h1>
+    <button id="checkButton">Check a Word</button>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('checkButton').addEventListener('click', function checkPalindrome() {
+            var continueChecking = true;
+
+            while (continueChecking) {
+                var userInput = prompt("Please enter a word to check if it's a palindrome:");
+                
+                if (userInput === null) {
+                    // User pressed cancel in prompt
+                    continueChecking = false;
+                    break;
+                }
+
+                var formattedInput = userInput.replace(/\s/g, '').toLowerCase();
+                if (formattedInput === formattedInput.split('').reverse().join('')) {
+                    document.getElementById('result').innerHTML = `"${userInput}" is a palindrome.`;
+                } else {
+                    document.getElementById('result').innerHTML = `"${userInput}" is not a palindrome.`;
+                }
+
+                // Ask the user if they want to check another word
+                continueChecking = confirm("Do you want to check another word?");
+            }
+        });
+    </script>
+    
+    <h1>Zip Code Checker</h1>
+
+    <!-- User's first and last name input fields -->
+    <input type="text" id="firstName" placeholder="First Name">
+    <input type="text" id="lastName" placeholder="Last Name">
+    <br>
+
+    <!-- User's zip code input field -->
+    <input type="text" id="zipCode" placeholder="Zip Code">
+    <button onclick="processInput()">Submit</button>
+
+    <div id="warning"></div>
+    <div id="secretMessage"></div>
+
+    <script>
+        // Function to process the user input
+        function processInput() {
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var zipCode = document.getElementById('zipCode').value;
+
+            // Combining first and last name
+            var fullName = firstName + ' ' + lastName;
+
+            // Check if the full name is longer than 20 characters
+            if (fullName.length > 20) {
+                document.getElementById('warning').innerHTML = 'Name should be less than 20 characters.';
+                return; // Stop the execution if invalid
+            }
+
+            // Check if the zip code is a 5-digit number
+            if (!/^\d{5}$/.test(zipCode)) {
+                document.getElementById('warning').innerHTML = 'Invalid Zip Code. Please enter a 5-digit Zip Code.';
+                return; // Stop the execution if invalid
+            }
+
+            // If all inputs are valid, display a secret message
+            document.getElementById('secretMessage').style.color = 'green';
+            document.getElementById('secretMessage').innerHTML = 'We have been trying to reach you about your car warranty';
+            document.getElementById('warning').innerHTML = ''; // Clear any previous warnings
+        }
+    </script>
+
+<!-- Background Sound Feature -->
+<audio id="backgroundAudio">
+    <source src="chill.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+
+<!-- Audio Control Buttons -->
+<button id="startAudio">Start Music</button>
+<button id="stopAudio" disabled>Stop Music</button>
+<br>
+<!-- GIF for Audio Visualization -->
+<img id="audioGif" src="dance.gif" style="display: none; width: 25%; height: 25%;" alt="Audio Animation">
+
+<script>
+    const bgAudio = document.getElementById('backgroundAudio');
+    const startAudioButton = document.getElementById('startAudio');
+    const stopAudioButton = document.getElementById('stopAudio');
+    const audioGif = document.getElementById('audioGif'); // Access the GIF element
+
+    // Function to play audio, show GIF, and update button states
+    function playAudio() {
+        bgAudio.play().catch(error => console.error("Error trying to play audio:", error));
+        audioGif.style.display = ''; // Show the GIF when audio starts
+        startAudioButton.disabled = true; // Disable start button when audio is playing
+        stopAudioButton.disabled = false; // Enable stop button when audio is playing
+    }
+
+    // Function to pause audio, hide GIF, and update button states
+    function stopAudio() {
+        bgAudio.pause();
+        audioGif.style.display = 'none'; // Hide the GIF when audio stops
+        startAudioButton.disabled = false; // Enable start button when audio is stopped
+        stopAudioButton.disabled = true; // Disable stop button when audio is stopped
+    }
+
+    // Event listeners for the buttons
+    startAudioButton.addEventListener('click', playAudio);
+    stopAudioButton.addEventListener('click', stopAudio);
+</script>
+
+
+
+        
+</body>
+</html>
+
