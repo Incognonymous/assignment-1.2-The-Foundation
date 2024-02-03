@@ -1,14 +1,62 @@
 <!DOCTYPE html>
+<!-- Modified by [Your Name] -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>This is my index page. LOOK AT IT!</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        /* Adding some styles for buttons and the image container for a better UX */
+        #memeImage {
+            transition: transform 1s ease; /* Smooth transition for image movement */
+        }
+        .button {
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Buttons to move the meme image -->
+    <button id="startButton" class="button">Start</button>
+    <button id="stopButton" class="button" disabled>Stop</button>
     <p>
         <img width="50%" height="50%" id="memeImage" src="nocap.jpg">
     </p>
-    
+
+    <script>
+        // Defining variables for the image and buttons
+        const memeImage = document.getElementById('memeImage');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+
+        let moveImageInterval; // For setting and clearing interval
+
+        // Function to move the meme image around
+        function moveMemeImage() {
+            memeImage.style.transform = `translate(${Math.random() * 500}px, ${Math.random() * 500}px)`;
+        }
+
+        // Function to start moving the meme image
+        function startMovingImage() {
+            moveImageInterval = setInterval(moveMemeImage, 1000); // Change image position every 1 second
+            startButton.disabled = true; // Disable the start button
+            stopButton.disabled = false; // Enable the stop button
+        }
+
+        // Function to stop moving the meme image
+        function stopMovingImage() {
+            clearInterval(moveImageInterval); // Stop the interval
+            startButton.disabled = false; // Enable the start button
+            stopButton.disabled = true; // Disable the stop button
+        }
+
+        // Event listeners for the buttons
+        startButton.onclick = startMovingImage;
+        stopButton.onclick = stopMovingImage;
+    </script>
 </body>
 </html>
